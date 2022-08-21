@@ -1,0 +1,104 @@
+﻿@model Intro2._0.Models.Introduction
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Introduction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeptContacts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeptContacts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacultyMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacultyMembers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Intro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Intro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageofVc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MessageofVc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageofChairman)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MessageofChairman)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department.DeptName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department.DeptName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Program.ProgramName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Program.ProgramName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.University.UniversityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.University.UniversityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Faculty.FacultyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Faculty.FacultyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Session.SessionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Session.SessionName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

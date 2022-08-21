@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71dbae35eecd4e219e9dd3a2eb41f843" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Department" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Faculty" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Introduction" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Program" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Semister" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Session" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.University" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Year" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__Departmen__Facul__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Departmen__Progr__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Departmen__Semis__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Departmen__Sessi__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Departmen__Unive__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Departmen__YearI__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Introduct__Depar__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Faculty__Univers__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Introduct__Progr__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Introduct__Unive__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Program__Univers__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Year__ProgramId__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Year__SemisterId__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Year__SessionId__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Year__University__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Introduct__Facul__412EB0B6" />
+        <AssociationConnector Association="Model.FK__Introduct__Sessi__403A8C7D" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

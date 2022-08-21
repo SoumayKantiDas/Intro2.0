@@ -1,0 +1,893 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeptName" Type="nvarchar" MaxLength="255" />
+          <Property Name="MinimumCreditRequirments" Type="nvarchar" MaxLength="255" />
+          <Property Name="UniversityId" Type="int" />
+          <Property Name="FacultyId" Type="int" />
+          <Property Name="SessionId" Type="int" />
+          <Property Name="SemisterId" Type="int" />
+          <Property Name="ProgramId" Type="int" />
+          <Property Name="YearId" Type="int" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacultyName" Type="nvarchar" MaxLength="255" />
+          <Property Name="UniversityId" Type="int" />
+        </EntityType>
+        <EntityType Name="Introduction">
+          <Key>
+            <PropertyRef Name="IntroductionId" />
+          </Key>
+          <Property Name="IntroductionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramId" Type="int" />
+          <Property Name="SessionId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="FacultyId" Type="int" />
+          <Property Name="UniversityId" Type="int" />
+          <Property Name="DeptContacts" Type="text" />
+          <Property Name="FacultyMembers" Type="text" />
+          <Property Name="Intro" Type="text" />
+          <Property Name="MessageofVc" Type="text" />
+          <Property Name="MessageofChairman" Type="text" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramId" />
+          </Key>
+          <Property Name="ProgramId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramName" Type="nvarchar" MaxLength="255" />
+          <Property Name="DurationOfProgram" Type="nvarchar" MaxLength="255" />
+          <Property Name="MinimumCreditRequirments" Type="nvarchar" MaxLength="255" />
+          <Property Name="UniversityId" Type="int" />
+        </EntityType>
+        <EntityType Name="Semister">
+          <Key>
+            <PropertyRef Name="SemisterId" />
+          </Key>
+          <Property Name="SemisterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SemisterName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ProgramId" Type="int" />
+          <Property Name="UniversityId" Type="int" />
+        </EntityType>
+        <EntityType Name="University">
+          <Key>
+            <PropertyRef Name="UniversityId" />
+          </Key>
+          <Property Name="UniversityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UniversityName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YearName" Type="nvarchar" MaxLength="255" />
+          <Property Name="SessionId" Type="int" />
+          <Property Name="SemisterId" Type="int" />
+          <Property Name="ProgramId" Type="int" />
+          <Property Name="UniversityId" Type="int" />
+        </EntityType>
+        <Association Name="FK__Departmen__Facul__33D4B598">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Progr__36B12243">
+          <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Semis__3A81B327">
+          <End Role="Semister" Type="Self.Semister" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semister">
+              <PropertyRef Name="SemisterId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="SemisterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Sessi__398D8EEE">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Unive__35BCFE0A">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__YearI__3B75D760">
+          <End Role="Year" Type="Self.Year" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year">
+              <PropertyRef Name="YearId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Faculty__Univers__37A5467C">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Depar__32E0915F">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Introduction" Type="Self.Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Facul__412EB0B6">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Introduction" Type="Self.Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Progr__34C8D9D1">
+          <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+          <End Role="Introduction" Type="Self.Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Sessi__403A8C7D">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Introduction" Type="Self.Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Unive__31EC6D26">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Introduction" Type="Self.Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Program__Univers__38996AB5">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Program" Type="Self.Program" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Program">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Year__ProgramId__3E52440B">
+          <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Year__SemisterId__3D5E1FD2">
+          <End Role="Semister" Type="Self.Semister" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semister">
+              <PropertyRef Name="SemisterId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="SemisterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Year__SessionId__3C69FB99">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Year__University__3F466844">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Introduction" EntityType="Self.Introduction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Semister" EntityType="Self.Semister" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="University" EntityType="Self.University" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Year" EntityType="Self.Year" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Departmen__Facul__33D4B598" Association="Self.FK__Departmen__Facul__33D4B598">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Progr__36B12243" Association="Self.FK__Departmen__Progr__36B12243">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Semis__3A81B327" Association="Self.FK__Departmen__Semis__3A81B327">
+            <End Role="Semister" EntitySet="Semister" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Sessi__398D8EEE" Association="Self.FK__Departmen__Sessi__398D8EEE">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Unive__35BCFE0A" Association="Self.FK__Departmen__Unive__35BCFE0A">
+            <End Role="University" EntitySet="University" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__YearI__3B75D760" Association="Self.FK__Departmen__YearI__3B75D760">
+            <End Role="Year" EntitySet="Year" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Faculty__Univers__37A5467C" Association="Self.FK__Faculty__Univers__37A5467C">
+            <End Role="University" EntitySet="University" />
+            <End Role="Faculty" EntitySet="Faculty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Depar__32E0915F" Association="Self.FK__Introduct__Depar__32E0915F">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Introduction" EntitySet="Introduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Facul__412EB0B6" Association="Self.FK__Introduct__Facul__412EB0B6">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Introduction" EntitySet="Introduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Progr__34C8D9D1" Association="Self.FK__Introduct__Progr__34C8D9D1">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="Introduction" EntitySet="Introduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Sessi__403A8C7D" Association="Self.FK__Introduct__Sessi__403A8C7D">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Introduction" EntitySet="Introduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Unive__31EC6D26" Association="Self.FK__Introduct__Unive__31EC6D26">
+            <End Role="University" EntitySet="University" />
+            <End Role="Introduction" EntitySet="Introduction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Program__Univers__38996AB5" Association="Self.FK__Program__Univers__38996AB5">
+            <End Role="University" EntitySet="University" />
+            <End Role="Program" EntitySet="Program" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Year__ProgramId__3E52440B" Association="Self.FK__Year__ProgramId__3E52440B">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="Year" EntitySet="Year" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Year__SemisterId__3D5E1FD2" Association="Self.FK__Year__SemisterId__3D5E1FD2">
+            <End Role="Semister" EntitySet="Semister" />
+            <End Role="Year" EntitySet="Year" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Year__SessionId__3C69FB99" Association="Self.FK__Year__SessionId__3C69FB99">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Year" EntitySet="Year" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Year__University__3F466844" Association="Self.FK__Year__University__3F466844">
+            <End Role="University" EntitySet="University" />
+            <End Role="Year" EntitySet="Year" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MinimumCreditRequirments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UniversityId" Type="Int32" />
+          <Property Name="FacultyId" Type="Int32" />
+          <Property Name="SessionId" Type="Int32" />
+          <Property Name="SemisterId" Type="Int32" />
+          <Property Name="ProgramId" Type="Int32" />
+          <Property Name="YearId" Type="Int32" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__Departmen__Facul__33D4B598" FromRole="Department" ToRole="Faculty" />
+          <NavigationProperty Name="Program" Relationship="Self.FK__Departmen__Progr__36B12243" FromRole="Department" ToRole="Program" />
+          <NavigationProperty Name="Semister" Relationship="Self.FK__Departmen__Semis__3A81B327" FromRole="Department" ToRole="Semister" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__Departmen__Sessi__398D8EEE" FromRole="Department" ToRole="Session" />
+          <NavigationProperty Name="University" Relationship="Self.FK__Departmen__Unive__35BCFE0A" FromRole="Department" ToRole="University" />
+          <NavigationProperty Name="Year" Relationship="Self.FK__Departmen__YearI__3B75D760" FromRole="Department" ToRole="Year" />
+          <NavigationProperty Name="Introductions" Relationship="Self.FK__Introduct__Depar__32E0915F" FromRole="Department" ToRole="Introduction" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacultyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UniversityId" Type="Int32" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Departmen__Facul__33D4B598" FromRole="Faculty" ToRole="Department" />
+          <NavigationProperty Name="University" Relationship="Self.FK__Faculty__Univers__37A5467C" FromRole="Faculty" ToRole="University" />
+          <NavigationProperty Name="Introductions" Relationship="Model.FK__Introduct__Facul__412EB0B6" FromRole="Faculty" ToRole="Introduction" />
+        </EntityType>
+        <EntityType Name="Introduction">
+          <Key>
+            <PropertyRef Name="IntroductionId" />
+          </Key>
+          <Property Name="IntroductionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramId" Type="Int32" />
+          <Property Name="SessionId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="FacultyId" Type="Int32" />
+          <Property Name="UniversityId" Type="Int32" />
+          <Property Name="DeptContacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FacultyMembers" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MessageofVc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MessageofChairman" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Introduct__Depar__32E0915F" FromRole="Introduction" ToRole="Department" />
+          <NavigationProperty Name="Program" Relationship="Self.FK__Introduct__Progr__34C8D9D1" FromRole="Introduction" ToRole="Program" />
+          <NavigationProperty Name="University" Relationship="Self.FK__Introduct__Unive__31EC6D26" FromRole="Introduction" ToRole="University" />
+          <NavigationProperty Name="Faculty" Relationship="Model.FK__Introduct__Facul__412EB0B6" FromRole="Introduction" ToRole="Faculty" />
+          <NavigationProperty Name="Session" Relationship="Model.FK__Introduct__Sessi__403A8C7D" FromRole="Introduction" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramId" />
+          </Key>
+          <Property Name="ProgramId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DurationOfProgram" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MinimumCreditRequirments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UniversityId" Type="Int32" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Departmen__Progr__36B12243" FromRole="Program" ToRole="Department" />
+          <NavigationProperty Name="Introductions" Relationship="Self.FK__Introduct__Progr__34C8D9D1" FromRole="Program" ToRole="Introduction" />
+          <NavigationProperty Name="University" Relationship="Self.FK__Program__Univers__38996AB5" FromRole="Program" ToRole="University" />
+          <NavigationProperty Name="Years" Relationship="Self.FK__Year__ProgramId__3E52440B" FromRole="Program" ToRole="Year" />
+        </EntityType>
+        <EntityType Name="Semister">
+          <Key>
+            <PropertyRef Name="SemisterId" />
+          </Key>
+          <Property Name="SemisterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SemisterName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Departmen__Semis__3A81B327" FromRole="Semister" ToRole="Department" />
+          <NavigationProperty Name="Years" Relationship="Self.FK__Year__SemisterId__3D5E1FD2" FromRole="Semister" ToRole="Year" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProgramId" Type="Int32" />
+          <Property Name="UniversityId" Type="Int32" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Departmen__Sessi__398D8EEE" FromRole="Session" ToRole="Department" />
+          <NavigationProperty Name="Years" Relationship="Self.FK__Year__SessionId__3C69FB99" FromRole="Session" ToRole="Year" />
+          <NavigationProperty Name="Introductions" Relationship="Model.FK__Introduct__Sessi__403A8C7D" FromRole="Session" ToRole="Introduction" />
+        </EntityType>
+        <EntityType Name="University">
+          <Key>
+            <PropertyRef Name="UniversityId" />
+          </Key>
+          <Property Name="UniversityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UniversityName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Departmen__Unive__35BCFE0A" FromRole="University" ToRole="Department" />
+          <NavigationProperty Name="Faculties" Relationship="Self.FK__Faculty__Univers__37A5467C" FromRole="University" ToRole="Faculty" />
+          <NavigationProperty Name="Introductions" Relationship="Self.FK__Introduct__Unive__31EC6D26" FromRole="University" ToRole="Introduction" />
+          <NavigationProperty Name="Programs" Relationship="Self.FK__Program__Univers__38996AB5" FromRole="University" ToRole="Program" />
+          <NavigationProperty Name="Years" Relationship="Self.FK__Year__University__3F466844" FromRole="University" ToRole="Year" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="YearId" />
+          </Key>
+          <Property Name="YearId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YearName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SessionId" Type="Int32" />
+          <Property Name="SemisterId" Type="Int32" />
+          <Property Name="ProgramId" Type="Int32" />
+          <Property Name="UniversityId" Type="Int32" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK__Departmen__YearI__3B75D760" FromRole="Year" ToRole="Department" />
+          <NavigationProperty Name="Program" Relationship="Self.FK__Year__ProgramId__3E52440B" FromRole="Year" ToRole="Program" />
+          <NavigationProperty Name="Semister" Relationship="Self.FK__Year__SemisterId__3D5E1FD2" FromRole="Year" ToRole="Semister" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__Year__SessionId__3C69FB99" FromRole="Year" ToRole="Session" />
+          <NavigationProperty Name="University" Relationship="Self.FK__Year__University__3F466844" FromRole="Year" ToRole="University" />
+        </EntityType>
+        <Association Name="FK__Departmen__Facul__33D4B598">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Progr__36B12243">
+          <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Semis__3A81B327">
+          <End Role="Semister" Type="Self.Semister" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semister">
+              <PropertyRef Name="SemisterId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="SemisterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Sessi__398D8EEE">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__Unive__35BCFE0A">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Departmen__YearI__3B75D760">
+          <End Role="Year" Type="Self.Year" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year">
+              <PropertyRef Name="YearId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Depar__32E0915F">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Introduction" Type="Self.Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Faculty__Univers__37A5467C">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Progr__34C8D9D1">
+          <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+          <End Role="Introduction" Type="Self.Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Unive__31EC6D26">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Introduction" Type="Self.Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Program__Univers__38996AB5">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Program" Type="Self.Program" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Program">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Year__ProgramId__3E52440B">
+          <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Year__SemisterId__3D5E1FD2">
+          <End Role="Semister" Type="Self.Semister" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semister">
+              <PropertyRef Name="SemisterId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="SemisterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Year__SessionId__3C69FB99">
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Year__University__3F466844">
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
+          <End Role="Year" Type="Self.Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityId" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="UniversityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Intro" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Introductions" EntityType="Self.Introduction" />
+          <EntitySet Name="Programs" EntityType="Self.Program" />
+          <EntitySet Name="Semisters" EntityType="Self.Semister" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <EntitySet Name="Universities" EntityType="Self.University" />
+          <EntitySet Name="Years" EntityType="Self.Year" />
+          <AssociationSet Name="FK__Departmen__Facul__33D4B598" Association="Self.FK__Departmen__Facul__33D4B598">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Progr__36B12243" Association="Self.FK__Departmen__Progr__36B12243">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Semis__3A81B327" Association="Self.FK__Departmen__Semis__3A81B327">
+            <End Role="Semister" EntitySet="Semisters" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Sessi__398D8EEE" Association="Self.FK__Departmen__Sessi__398D8EEE">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__Unive__35BCFE0A" Association="Self.FK__Departmen__Unive__35BCFE0A">
+            <End Role="University" EntitySet="Universities" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Departmen__YearI__3B75D760" Association="Self.FK__Departmen__YearI__3B75D760">
+            <End Role="Year" EntitySet="Years" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Depar__32E0915F" Association="Self.FK__Introduct__Depar__32E0915F">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Introduction" EntitySet="Introductions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Faculty__Univers__37A5467C" Association="Self.FK__Faculty__Univers__37A5467C">
+            <End Role="University" EntitySet="Universities" />
+            <End Role="Faculty" EntitySet="Faculties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Progr__34C8D9D1" Association="Self.FK__Introduct__Progr__34C8D9D1">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="Introduction" EntitySet="Introductions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Unive__31EC6D26" Association="Self.FK__Introduct__Unive__31EC6D26">
+            <End Role="University" EntitySet="Universities" />
+            <End Role="Introduction" EntitySet="Introductions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Program__Univers__38996AB5" Association="Self.FK__Program__Univers__38996AB5">
+            <End Role="University" EntitySet="Universities" />
+            <End Role="Program" EntitySet="Programs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Year__ProgramId__3E52440B" Association="Self.FK__Year__ProgramId__3E52440B">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="Year" EntitySet="Years" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Year__SemisterId__3D5E1FD2" Association="Self.FK__Year__SemisterId__3D5E1FD2">
+            <End Role="Semister" EntitySet="Semisters" />
+            <End Role="Year" EntitySet="Years" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Year__SessionId__3C69FB99" Association="Self.FK__Year__SessionId__3C69FB99">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Year" EntitySet="Years" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Year__University__3F466844" Association="Self.FK__Year__University__3F466844">
+            <End Role="University" EntitySet="Universities" />
+            <End Role="Year" EntitySet="Years" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Facul__412EB0B6" Association="Model.FK__Introduct__Facul__412EB0B6">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Introduction" EntitySet="Introductions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Introduct__Sessi__403A8C7D" Association="Model.FK__Introduct__Sessi__403A8C7D">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Introduction" EntitySet="Introductions" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK__Introduct__Facul__412EB0B6">
+          <End Type="Model.Faculty" Role="Faculty" Multiplicity="0..1" />
+          <End Type="Model.Introduction" Role="Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Introduct__Sessi__403A8C7D">
+          <End Type="Model.Session" Role="Session" Multiplicity="0..1" />
+          <End Type="Model.Introduction" Role="Introduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="Introduction">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Intro">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Model.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="MinimumCreditRequirments" ColumnName="MinimumCreditRequirments" />
+                <ScalarProperty Name="UniversityId" ColumnName="UniversityId" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="SemisterId" ColumnName="SemisterId" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="Model.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+                <ScalarProperty Name="UniversityId" ColumnName="UniversityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Introductions">
+            <EntityTypeMapping TypeName="Model.Introduction">
+              <MappingFragment StoreEntitySet="Introduction">
+                <ScalarProperty Name="IntroductionId" ColumnName="IntroductionId" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="UniversityId" ColumnName="UniversityId" />
+                <ScalarProperty Name="DeptContacts" ColumnName="DeptContacts" />
+                <ScalarProperty Name="FacultyMembers" ColumnName="FacultyMembers" />
+                <ScalarProperty Name="Intro" ColumnName="Intro" />
+                <ScalarProperty Name="MessageofVc" ColumnName="MessageofVc" />
+                <ScalarProperty Name="MessageofChairman" ColumnName="MessageofChairman" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programs">
+            <EntityTypeMapping TypeName="Model.Program">
+              <MappingFragment StoreEntitySet="Program">
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="DurationOfProgram" ColumnName="DurationOfProgram" />
+                <ScalarProperty Name="MinimumCreditRequirments" ColumnName="MinimumCreditRequirments" />
+                <ScalarProperty Name="UniversityId" ColumnName="UniversityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Semisters">
+            <EntityTypeMapping TypeName="Model.Semister">
+              <MappingFragment StoreEntitySet="Semister">
+                <ScalarProperty Name="SemisterId" ColumnName="SemisterId" />
+                <ScalarProperty Name="SemisterName" ColumnName="SemisterName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="Model.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="SessionName" ColumnName="SessionName" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="UniversityId" ColumnName="UniversityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Universities">
+            <EntityTypeMapping TypeName="Model.University">
+              <MappingFragment StoreEntitySet="University">
+                <ScalarProperty Name="UniversityId" ColumnName="UniversityId" />
+                <ScalarProperty Name="UniversityName" ColumnName="UniversityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Years">
+            <EntityTypeMapping TypeName="Model.Year">
+              <MappingFragment StoreEntitySet="Year">
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+                <ScalarProperty Name="YearName" ColumnName="YearName" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="SemisterId" ColumnName="SemisterId" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="UniversityId" ColumnName="UniversityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

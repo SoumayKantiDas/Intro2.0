@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Intro2._0.Models.Introduction>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DeptContacts)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacultyMembers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Intro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageofVc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageofChairman)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department.DeptName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Program.ProgramName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.University.UniversityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Faculty.FacultyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Session.SessionName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeptContacts)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacultyMembers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Intro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MessageofVc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MessageofChairman)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department.DeptName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Program.ProgramName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.University.UniversityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Session.SessionName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IntroductionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IntroductionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IntroductionId })
+        </td>
+    </tr>
+}
+
+</table>
